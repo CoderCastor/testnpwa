@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-import logo from '../public/npwa-logo.png';
+import logo from "../public/npwa-logo.png";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -14,6 +14,8 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCommitteeOpen, setIsCommitteeOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isMobileCommitteeOpen, setIsMobileCommitteeOpen] = useState(false);
+  const [isMobileLoginOpen, setIsMobileLoginOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +40,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center px-6 py-4">
         {/* Logo */}
         <div className="flex gap-4 justify-center items-center">
-          <Image className="h-10 scale-150" src={logo.src} alt="NPWA Logo" />
+          <Image src={logo.src} alt="NPWA Logo" width={100} height={50} />
           <h1 className="text-xl font-bold text-green-600 leading-none">
             National Pharmacy <br /> Welfare Association
           </h1>
@@ -73,8 +75,18 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <Link href="/committee/local-organizing-committee" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">Local Organizing Committee</Link>
-                <Link href="/committee/advisory-committee" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">Advisory Committee</Link>
+                <Link
+                  href="/committee/local-organizing-committee"
+                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                >
+                  Local Organizing Committee
+                </Link>
+                <Link
+                  href="/committee/advisory-committee"
+                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                >
+                  Advisory Committee
+                </Link>
               </motion.div>
             )}
           </div>
@@ -83,9 +95,9 @@ const Navbar = () => {
           <div className="relative">
             <motion.button
               onClick={() => setIsLoginOpen(!isLoginOpen)}
-              className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white"
+              className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white flex items-center gap-2"
             >
-              Login <ChevronDown size={16} className="ml-1" />
+              Login <ChevronDown size={16} />
             </motion.button>
             {isLoginOpen && (
               <motion.div
@@ -93,19 +105,109 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <Link href="/login/member" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">Member</Link>
-                <Link href="/login/admin" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">Admin</Link>
-                <Link href="/login/user" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">User</Link>
+                <Link
+                  href="/login/member"
+                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                >
+                  Member
+                </Link>
+                <Link
+                  href="/login/admin"
+                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                >
+                  Admin
+                </Link>
+                <Link
+                  href="/login/user"
+                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                >
+                  User
+                </Link>
               </motion.div>
             )}
           </div>
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden p-2 text-gray-600" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        <button
+          className="md:hidden p-2 text-gray-600"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <motion.div
+          className="md:hidden absolute top-16 left-0 w-full bg-white shadow-lg py-4 flex flex-col items-center space-y-4"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {sections.map((section) => (
+            <button
+              key={section}
+              className={`text-gray-600 transition text-lg ${
+                activeSection === section
+                  ? "bg-green-500 text-white font-bold rounded-md px-4 py-2"
+                  : "hover:text-blue-500"
+              }`}
+            >
+              {section}
+            </button>
+          ))}
+
+          {/* Committee Dropdown */}
+          <div className="relative w-full text-center">
+            <button
+              onClick={() => setIsMobileCommitteeOpen(!isMobileCommitteeOpen)}
+              className="text-gray-600 hover:text-blue-500 transition text-lg flex justify-center items-center w-full py-2"
+            >
+              Committee <ChevronDown size={16} className="ml-1" />
+            </button>
+            {isMobileCommitteeOpen && (
+              <div className="bg-white shadow-lg rounded-lg py-2">
+                <Link
+                  href="/committee/local-organizing-committee"
+                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                >
+                  Local Organizing Committee
+                </Link>
+                <Link
+                  href="/committee/advisory-committee"
+                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
+                >
+                  Advisory Committee
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Login Dropdown */}
+          <div className="relative w-full text-center">
+            <button
+              onClick={() => setIsMobileLoginOpen(!isMobileLoginOpen)}
+              className="text-gray-600 hover:text-blue-500 transition text-lg flex justify-center items-center w-full py-2"
+            >
+              Login <ChevronDown size={16} className="ml-1" />
+            </button>
+            {isMobileLoginOpen && (
+              <div className="bg-white shadow-lg rounded-lg py-2">
+                <Link href="/login/member" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
+                  Member
+                </Link>
+                <Link href="/login/admin" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
+                  Admin
+                </Link>
+                <Link href="/login/user" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
+                  User
+                </Link>
+              </div>
+            )}
+          </div>
+        </motion.div>
+      )}
     </nav>
   );
 };
