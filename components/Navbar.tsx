@@ -40,7 +40,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center px-6 py-4">
         {/* Logo */}
         <div className="flex gap-4 justify-center items-center">
-          <Image src={logo.src} alt="NPWA Logo" width={100} height={50} />
+          {/* <Image src={logo.src} alt="NPWA Logo" width={50} height={50} /> */}
           <h1 className="text-xl font-bold text-green-600 leading-none">
             National Pharmacy <br /> Welfare Association
           </h1>
