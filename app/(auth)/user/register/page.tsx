@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function RegistrationForm() {
-  const router = useRouter();
+  // const router = useRouter();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -46,7 +46,7 @@ export default function RegistrationForm() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsRegistered(true);
-    } catch (err) {
+    } catch (_) {
       setError("Registration failed. Please try again.");
     } finally {
       setLoading(false);
