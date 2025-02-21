@@ -194,13 +194,13 @@ const Navbar = () => {
             </button>
             {isMobileLoginOpen && (
               <div className="bg-white shadow-lg rounded-lg py-2">
-                <Link href="/login/member" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
+                <Link href="/member/login" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   Member
                 </Link>
-                <Link href="/login/admin" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
+                <Link href="/admin/login" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   Admin
                 </Link>
-                <Link href="/login/user" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
+                <Link href="/user/login" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   User
                 </Link>
               </div>
