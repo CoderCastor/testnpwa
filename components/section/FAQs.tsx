@@ -47,14 +47,14 @@ const faqs = [
 ];
 
 export default function FAQs() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const toggleFAQ = (index : any) => {
+  const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <div id="FAQs" className="min-h-screen bg-white-100 py-12 px-6 sm:mt-2">
+    <div id="FAQs" className="min-h-screen bg-gray-100 py-12 px-6 sm:mt-2">
       {/* Title */}
       <h2 className="text-4xl font-extrabold text-center text-blue-600">
         FAQs
