@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
       sections.forEach((section) => {
         const element = document.getElementById(section);
         if (element) {
-          const offsetTop = element.offsetTop - 100;
+          const offsetTop = element.offsetTop - 0;
           const offsetBottom = offsetTop + element.clientHeight;
           if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
             setActiveSection(section);
@@ -111,13 +111,13 @@ const Navbar: React.FC = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <Link href="/login/member" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
+                <Link href="/member/login" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   Member
                 </Link>
-                <Link href="/login/admin" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
+                <Link href="/admin/login" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   Admin
                 </Link>
-                <Link href="/login/user" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
+                <Link href="/user/login" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   User
                 </Link>
               </motion.div>
