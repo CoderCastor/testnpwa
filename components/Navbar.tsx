@@ -3,19 +3,19 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-import logo from "../public/npwa-logo.png";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import logo from "../public/npwa-logo.png";
 
-const sections = ["About", "Events", "Membership", "FAQs", "Contact"];
+// Define section types
+const sections: string[] = ["About", "Events", "Membership", "FAQs", "Contact"];
 
-const Navbar = () => {
-  const [activeSection, setActiveSection] = useState("");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isCommitteeOpen, setIsCommitteeOpen] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isMobileCommitteeOpen, setIsMobileCommitteeOpen] = useState(false);
-  const [isMobileLoginOpen, setIsMobileLoginOpen] = useState(false);
+const Navbar: React.FC = () => {
+  const [activeSection, setActiveSection] = useState<string>("");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [isCommitteeOpen, setIsCommitteeOpen] = useState<boolean>(false);
+  const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
+  const [isMobileCommitteeOpen, setIsMobileCommitteeOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,9 +31,20 @@ const Navbar = () => {
         }
       });
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Function to handle smooth scrolling
+  const handleScrollToSection = (section: string) => {
+    const element = document.getElementById(section);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      setActiveSection(section);
+      setIsMobileMenuOpen(false); // Close menu on selection
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
@@ -51,6 +62,7 @@ const Navbar = () => {
           {sections.map((section) => (
             <motion.button
               key={section}
+              onClick={() => handleScrollToSection(section)}
               className={`relative px-4 py-2 text-gray-600 transition ${
                 activeSection === section
                   ? "bg-green-500 text-white font-bold rounded-md"
@@ -75,16 +87,10 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <Link
-                  href="/committee/local-organizing-committee"
-                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                >
+                <Link href="/committee/local-organizing-committee" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   Local Organizing Committee
                 </Link>
-                <Link
-                  href="/committee/advisory-committee"
-                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                >
+                <Link href="/committee/advisory-committee" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   Advisory Committee
                 </Link>
               </motion.div>
@@ -105,22 +111,13 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <Link
-                  href="/login/member"
-                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                >
+                <Link href="/login/member" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   Member
                 </Link>
-                <Link
-                  href="/login/admin"
-                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                >
+                <Link href="/login/admin" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   Admin
                 </Link>
-                <Link
-                  href="/login/user"
-                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                >
+                <Link href="/login/user" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   User
                 </Link>
               </motion.div>
@@ -148,6 +145,7 @@ const Navbar = () => {
           {sections.map((section) => (
             <button
               key={section}
+              onClick={() => handleScrollToSection(section)}
               className={`text-gray-600 transition text-lg ${
                 activeSection === section
                   ? "bg-green-500 text-white font-bold rounded-md px-4 py-2"
@@ -168,40 +166,11 @@ const Navbar = () => {
             </button>
             {isMobileCommitteeOpen && (
               <div className="bg-white shadow-lg rounded-lg py-2">
-                <Link
-                  href="/committee/local-organizing-committee"
-                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                >
+                <Link href="/committee/local-organizing-committee" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   Local Organizing Committee
                 </Link>
-                <Link
-                  href="/committee/advisory-committee"
-                  className="block px-4 py-2 text-gray-600 hover:bg-gray-100"
-                >
+                <Link href="/committee/advisory-committee" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
                   Advisory Committee
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Login Dropdown */}
-          <div className="relative w-full text-center">
-            <button
-              onClick={() => setIsMobileLoginOpen(!isMobileLoginOpen)}
-              className="text-gray-600 hover:text-blue-500 transition text-lg flex justify-center items-center w-full py-2"
-            >
-              Login <ChevronDown size={16} className="ml-1" />
-            </button>
-            {isMobileLoginOpen && (
-              <div className="bg-white shadow-lg rounded-lg py-2">
-                <Link href="/member/login" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
-                  Member
-                </Link>
-                <Link href="/admin/login" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
-                  Admin
-                </Link>
-                <Link href="/user/login" className="block px-4 py-2 text-gray-600 hover:bg-gray-100">
-                  User
                 </Link>
               </div>
             )}
