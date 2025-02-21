@@ -32,7 +32,8 @@ export default function AdminLogin() {
       
       // If login is successful, redirect to dashboard
       router.push('/dashboard');
-    } catch (_) {
+    } catch (err) {
+      console.log(err)
       setError('Invalid username or password');
     } finally {
       setLoading(false);

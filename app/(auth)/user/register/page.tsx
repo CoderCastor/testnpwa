@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function RegistrationForm() {
@@ -46,8 +46,9 @@ export default function RegistrationForm() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsRegistered(true);
-    } catch (_) {
+    } catch (err) {
       setError("Registration failed. Please try again.");
+      console.log(err)
     } finally {
       setLoading(false);
     }

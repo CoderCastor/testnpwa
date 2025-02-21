@@ -32,8 +32,9 @@ export default function UserLogin() {
       
       // If login is successful, redirect to dashboard
       router.push('/dashboard');
-    } catch (_) {
+    } catch (err) {
       setError('Invalid username or password');
+      console.log(err)
     } finally {
       setLoading(false);
     }
