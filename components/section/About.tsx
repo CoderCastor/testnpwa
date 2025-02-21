@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import logo from "../../public/npwa-logo.png"
+import Image from "next/image";
 
 const About = () => {
   return (
@@ -14,7 +15,7 @@ const About = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <img  className="h-48 sm:h-80 mx-auto " src={logo.src} alt="logo" />
+        <Image  className="h-48 sm:h-80 mx-auto " src={logo.src} alt="logo" />
         
         <motion.h1 initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logo from '../public/npwa-logo.png';
 import Link from "next/link";
+import Image from "next/image";
 
 const sections = [
   "About",
@@ -57,7 +58,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center px-6 py-4">
         {/* Logo */}
         <div className="flex gap-4 justify-center items-center">
-          <img className="h-10 scale-150" src={logo.src} alt="NPWA Logo" />
+          <Image className="h-10 scale-150" src={logo.src} alt="NPWA Logo" />
           <h1 className=" text-xl font-bold text-green-600 leading-none">National Pharmacy <br />  Welfare Association</h1>
         </div>
 
